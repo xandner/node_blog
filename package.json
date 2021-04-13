@@ -4,15 +4,21 @@
   "description": "pessonal blog",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev":"nodemon app.js"
+    "start": "cross-env NODE_ENV=production  node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js"
   },
   "keywords": [],
   "author": "xander",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mogoose": "0.0.1-security"
+    "mogoose": "0.0.1-security",
+    "mongoose": "^5.12.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

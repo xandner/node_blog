@@ -19,7 +19,8 @@
     "font-awesome": "^4.7.0",
     "mogoose": "0.0.1-security",
     "mongoose": "^5.12.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

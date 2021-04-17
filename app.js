@@ -25,6 +25,9 @@ app.set("views", "views");
 app.use(exoressLayout)
 app.set('layout','./layouts/mainLayout')
 
+//*body parser
+app.use(express.urlencoded({extended:false}))
+
 //* connect to db
 
 connectDB();
@@ -34,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //* routes
 app.use('/dashboard',dashRoutes)
+app.use('/users',require('./routes/users'))
 app.use(indexRoutes);
 
 

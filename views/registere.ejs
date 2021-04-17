@@ -1,0 +1,18 @@
+<body class="text-center">
+    <form class="form-signin" action="/users/registere" method="POST">
+        <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">ثبت نام</h1>
+        <label for="fullname" class="sr-only">نام و نام خانوادگی</label>
+        <label for="inputEmail" class="sr-only">نام و نام خانوادگی</label>
+        <input name="fullname" type="text" id="fullname" class="form-control" placeholder="نام و نام خانوادگی" required
+            autofocus>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="ایمیل" required>
+        <label for="inputPassword" class="sr-only">کلمه عبور</label>
+        <label for="inputPassword_conf" class="sr-only">تکرار کلمه عبور</label>
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="کلمه عبور" required>
+        <input name="confirmPassword" type="password" id="inputPassword_conf" class="form-control" placeholder="کلمه عبور" required>
+        <div class="checkbox mb-3">
+            <a href="/users/login">قبلا عضو شده ام</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">ثبت نام</button>
+    </form>

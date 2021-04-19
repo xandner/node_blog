@@ -16,6 +16,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
+    "fastest-validator": "^1.10.1",
     "font-awesome": "^4.7.0",
     "mogoose": "0.0.1-security",
     "mongoose": "^5.12.3",

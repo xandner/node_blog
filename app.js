@@ -40,6 +40,11 @@ app.use('/dashboard',dashRoutes)
 app.use('/users',require('./routes/users'))
 app.use(indexRoutes);
 
+//* 404 page
+app.use((req,res)=>{
+res.render("404",{pageTitle:"صفحه پیدا نشد",path:'/404'})
+})
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

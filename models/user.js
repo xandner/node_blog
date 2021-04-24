@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const {schema}=require('./secure/userValidation');
+const { schema } = require("./secure/userValidation");
+
 const userSchema = new mongoose.Schema({
     fullname: {
         type: String,
@@ -9,13 +10,13 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true,"ایمیل الزامی است"],
-        unique: [true,"ایمیل قبلا وارد شده است"],
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
-        required: [true,"وارد کردن کلمه عبور الزامی است"],
-        minlength: [4,"مقداری بیشتر راز 4 کاراکتر باید وارد شود"],
+        required: true,
+        minlength: 4,
         maxlength: 255,
     },
     createdAt: {
@@ -23,8 +24,6 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
-
-
 
 userSchema.statics.userValidation = function (body) {
     return schema.validate(body, { abortEarly: false });

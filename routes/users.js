@@ -1,13 +1,12 @@
 const { Router } = require("express");
+
+const userController = require("../controllers/userController");
+
 const router = new Router();
-const userController = require('../controllers/userControllers');
-// const v = new Validator();
-
-
 
 //  @desc   Login Page
 //  @route  GET /users/login
-router.get("/login",userController.login);
+router.get("/login", userController.login);
 
 //  @desc   Register Page
 //  @route  GET /users/register

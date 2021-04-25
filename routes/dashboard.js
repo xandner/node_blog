@@ -11,4 +11,7 @@ router.get("/", authenticated,adminConroller.getDashboard);
 
 router.get("/add-post", authenticated,adminConroller.getAddPost);
 
+// create post
+router.post("/add-post", authenticated,adminConroller.createPost);
+
 module.exports = router;

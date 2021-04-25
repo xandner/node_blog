@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { authenticated } = require("../middlewares/auth");
 
 const userController = require("../controllers/userController");
 
@@ -10,6 +11,10 @@ router.get("/login", userController.login);
 
 
 router.post("/login", userController.handelLogin);
+
+
+// logout
+router.get("/logout",authenticated, userController.logout);
 
 //  @desc   Register Page
 //  @route  GET /users/register

@@ -2,6 +2,7 @@ const path = require("path");
 
 const debug = require('debug')("blog");
 const express = require("express");
+const bodyParser=require('body-parser');
 const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
 const passport = require("passport");
@@ -38,7 +39,8 @@ app.set("layout", "./layouts/mainLayout");
 app.set("views", "views");
 
 //* BodyPaser
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 //* Session
 app.use(

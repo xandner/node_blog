@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const passport = require('passport');
+const fetch = require('node-fetch');
 
 const User = require("../models/User");
 
@@ -12,28 +13,51 @@ exports.login = (req, res) => {
     });
 };
 
-exports.handelLogin = (req, res, next) => {
-    passport.authenticate("local", {
-        // successRedirect: '/dashboard',
-        failureRedirect: '/users/login',
-        failureFlash: true
-    })(req, res, next);
+exports.handelLogin = async (req, res, next) => {
+    if (!req.body['g-recaptcha-response']) {
+        req.flash('error', "اعتبار سنجی باید انجام شود")
+        return res.redirect('/users/login')
+    }
+    const secret_key = process.env.CAPTCHA_SECRET;
+    const verifyurl = `https://google.com/recaptcha/api/siteverify?secret=${secret_key}
+    &response=${req.body['g-recaptcha-response']}&remoteip=${req.body.remoteAddress}`
+
+    const response =await fetch(verifyurl,{
+        method:"POST",
+        Headers:{
+            Accept:"application/json",
+            "Content-Type":"application/x-www-form-urlencoded; charset=utf-8"
+        }
+    })
+    const json=await response.json()
+    if (json.success){
+
+        passport.authenticate("local", {
+            // successRedirect: '/dashboard',
+            failureRedirect: '/users/login',
+            failureFlash: true
+        })(req, res, next);
+
+    }else{
+        req.flash('error',"خطای اعتبار سنجی")
+        res,redirect('/users/login')
+    }
 }
 
 
-exports.rememberMe=(req,res)=>{
-    if(req.body.remember){
-        req.session.cookie.originalMaxAge=24*60*60*1000
-    }else{
-        req.session.cookie.expire=null
+exports.rememberMe = (req, res) => {
+    if (req.body.remember) {
+        req.session.cookie.originalMaxAge = 24 * 60 * 60 * 1000
+    } else {
+        req.session.cookie.expire = null
     }
     res.redirect('/dashboard')
 }
 
 
-exports.logout=(req,res)=>{
+exports.logout = (req, res) => {
     req.logout();
-    req.flash("success_msg","خروج موفقیت آمیز بود");
+    req.flash("success_msg", "خروج موفقیت آمیز بود");
     res.redirect('/users/login')
 }
 

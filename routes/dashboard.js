@@ -1,17 +1,14 @@
 const { Router } = require("express");
 const { authenticated } = require('../middlewares/auth');
+const adminConroller=require('../controllers/adminController');
 
 const router = new Router();
 
 //  @desc   Dashboard
 //  @route  GET /dashboard
-router.get("/", authenticated, (req, res) => {
-    res.render("dashboard", {
-        pageTitle: "بخش مدیریت | داشبورد",
-        path: "/dashboard",
-        layout: "./layouts/dashLayout",
-        fullname:req.user.fullname
-    });
-});
+router.get("/", authenticated,adminConroller.getDashboard);
+
+
+router.get("/add-post", authenticated,adminConroller.getAddPost);
 
 module.exports = router;

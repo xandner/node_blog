@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production  node app.js",
-    "dev": "cross-env NODE_ENV=development nodemon app.js"
+    "dev": "cross-env NODE_ENV=development DEBUG=blog nodemon app.js"
   },
   "keywords": [],
   "author": "xander",
@@ -15,6 +15,7 @@
     "bootstrap-v4-rtl": "^4.6.0-2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
+    "debug": "^4.3.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",

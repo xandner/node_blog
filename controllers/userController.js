@@ -60,8 +60,8 @@ exports.createUser = async (req, res) => {
             });
         }
 
-        const hash = await bcrypt.hash(password, 10);
-        await User.create({ fullname, email, password: hash });
+        // const hash = await bcrypt.hash(password, 10);
+        await User.create({ fullname, email, password: password });
         req.flash("success_msg", "ثبت نام موفقیت آمیز بود.");
         res.redirect("/users/login");
     } catch (err) {

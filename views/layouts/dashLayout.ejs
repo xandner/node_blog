@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
     <link rel="stylesheet" href="/css/font-awesome.css" />
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <title>
         <%= pageTitle %>
     </title>
@@ -57,6 +58,11 @@
                 </main>
         </div>
     </div>
+    <script>
+        CKEDITOR.replace("body",{
+            language:"fa"
+        })
+    </script>
     <script src="/js/jquery.slim.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
 

@@ -24,6 +24,7 @@
     "express-session": "^1.17.1",
     "fastest-validator": "^1.10.1",
     "font-awesome": "^4.7.0",
+    "jalali-moment": "^3.3.10",
     "mogoose": "0.0.1-security",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",

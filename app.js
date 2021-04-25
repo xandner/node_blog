@@ -1,12 +1,14 @@
 const path = require("path");
 
 const express = require("express");
+const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
+const passport = require("passport");
 const dotEnv = require("dotenv");
 const morgan = require("morgan");
 const flash = require("connect-flash");
 const session = require("express-session");
-const passport = require('passport');
+const MongoStore = require("connect-mongo")(session);
 
 const connectDB = require("./config/db");
 
@@ -16,14 +18,14 @@ dotEnv.config({ path: "./config/config.env" });
 //* Database connection
 connectDB();
 
-//*passport config
-require('./config/passport');
+//* Passport Configuration
+require("./config/passport");
 
 const app = express();
 
 //* Logging
 if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"));
+   app.use(morgan("dev"));
 }
 
 //* View Engine
@@ -37,18 +39,17 @@ app.use(express.urlencoded({ extended: false }));
 
 //* Session
 app.use(
-    session({
-        secret: "secret",
-        cookie: { maxAge: 60000 },
-        resave: false,
-        saveUninitialized: false,
-    })
+   session({
+       secret: "secret",
+       resave: false,
+       saveUninitialized: false,
+       store: new MongoStore({ mongooseConnection: mongoose.connection }),
+   })
 );
 
-//* passport
-app.use(passport.initialize())
-app.use(passport.session())
-
+//* Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //* Flash
 app.use(flash()); //req.flash
@@ -63,13 +64,13 @@ app.use("/dashboard", require("./routes/dashboard"));
 
 //* 404 Page
 app.use((req, res) => {
-    res.render("404", { pageTitle: "صفحه پیدا نشد | 404", path: "/404" });
+   res.render("404", { pageTitle: "صفحه پیدا نشد | 404", path: "/404" });
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () =>
-    console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-    )
+   console.log(
+       `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+   )
 );

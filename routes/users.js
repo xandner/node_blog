@@ -10,7 +10,7 @@ const router = new Router();
 router.get("/login", userController.login);
 
 
-router.post("/login", userController.handelLogin);
+router.post("/login", userController.handelLogin,userController.rememberMe);
 
 
 // logout

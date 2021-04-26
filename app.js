@@ -45,7 +45,7 @@ app.use(bodyParser.json())
 //* Session
 app.use(
    session({
-       secret: process.env.SESSON_SECRET,
+       secret: process.env.SESSON,
        resave: false,
        saveUninitialized: false,
        store: new MongoStore({ mongooseConnection: mongoose.connection }),

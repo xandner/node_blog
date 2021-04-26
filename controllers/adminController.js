@@ -1,5 +1,6 @@
 const Blog = require('../models/blog');
 const { formatDate } = require('../utils/jalali');
+const { get500 } = require('./errorController');
 
 exports.getDashboard = async (req, res) => {
     try {
@@ -13,6 +14,7 @@ exports.getDashboard = async (req, res) => {
             formatDate,
         })
     } catch (error) {
+        get500(req,res)
         console.log(error);
     }
 }
@@ -27,9 +29,11 @@ exports.getAddPost = (req, res) => {
 }
 exports.createPost = async (req, res) => {
     try {
+        // throw new Error('error')
         await Blog.create({ ...req.body, user: req.user.id })
         res.redirect('/dashboard')
     } catch (error) {
+        get500(req,res)
         console.log(err);
     }
 }

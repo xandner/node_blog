@@ -14,4 +14,6 @@ router.get("/add-post", authenticated,adminConroller.getAddPost);
 // create post
 router.post("/add-post", authenticated,adminConroller.createPost);
 
+router.post("/image-upload",authenticated,adminConroller.uploadImage)
+
 module.exports = router;

@@ -55,3 +55,7 @@ exports.createPost = async (req, res) => {
     })
     }
 }
+
+exports.uploadImage=(req,res)=>{
+    
+}

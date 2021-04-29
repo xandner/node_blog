@@ -11,6 +11,7 @@ router.get("/", authenticated,adminConroller.getDashboard);
 
 router.get("/add-post", authenticated,adminConroller.getAddPost);
 router.get("/edit-post/:id", authenticated,adminConroller.getEditPost);
+router.get("/delete-post/:id", authenticated,adminConroller.getDeletePost);
 
 // create post
 router.post("/add-post", authenticated,adminConroller.createPost);

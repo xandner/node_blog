@@ -165,3 +165,12 @@ exports.uploadImage = (req, res) => {
         }
     });
 };
+exports.getDeletePost=async(req,res)=>{
+    try {
+        await Blog.findByIdAndRemove(req.params.id)
+        res.redirect("/dashboard")
+        
+    } catch (error) {
+        res.render('errors/500')
+    }
+}

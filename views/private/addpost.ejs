@@ -12,8 +12,8 @@
         <div class="form-group">
             <label for="status">وضعیت</label>
             <select name="status" class="form-control w-25" id="status">
-                <option value="عمومی" selected>عمومی</option>
-                <option value="خصوصی">خصوصی</option>
+                <option value="public" selected>عمومی</option>
+                <option value="private">خصوصی</option>
             </select>
         </div>
 
@@ -34,6 +34,11 @@
                             role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
+            </div>
+            <div class="w-1 bg-light text-center">
+                <p id="uploadResult" class="overflow-auto">
+                    آدرس
+                </p>
             </div>
             <h5>متن اصلی پست</h5>
             <textarea name="body" class="form-control" id="body"></textarea>

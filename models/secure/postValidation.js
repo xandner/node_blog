@@ -7,6 +7,6 @@ exports.schema = Yup.object().shape({
         .max(100, "عنوان نباید بیشتر از 100 کاراکتر باشد"),
     body: Yup.string()
         .required("پست جدید نباید خالی باشد"),
-    status: Yup.mixed().oneOf(["عمومی", "خصوصی"], "وضعیت غیر مجاز میباشد.")
+    status: Yup.mixed().oneOf(["private", "public"], "وضعیت غیر مجاز میباشد.")
 
 })

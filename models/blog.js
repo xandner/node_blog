@@ -15,14 +15,12 @@ const blogSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "عمومی",
-        enum: ["خصوصی", "عمومی"]
+        default: "public",
+        enum: ["private", "public"],
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-
-
     },
     createdAt: {
         type: Date,

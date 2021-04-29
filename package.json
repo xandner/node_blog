@@ -32,6 +32,8 @@
     "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "sharp": "^0.28.1",
+    "shortid": "^2.2.16",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },

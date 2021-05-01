@@ -10,15 +10,29 @@ const { fileFilter, storage } = require('../utils/multer');
 
 
 exports.getDashboard = async (req, res) => {
+    const page = +req.query.page || 1
+    const postPerPage = 2
+
     try {
+        const numberOfPosts = await Blog.find({
+            user: req.user._id,
+        }).countDocuments();
         const blogs = await Blog.find({ user: req.user.id })
+            .skip((page - 1) * postPerPage)
+            .limit(postPerPage);
         res.render('private/blog', {
-            pageTitle: "صفحه مدیریت",
-            path: '/dashboard',
+            pageTitle: "بخش مدیریت | داشبورد",
+            path: "/dashboard",
             layout: "./layouts/dashLayout",
             fullname: req.user.fullname,
             blogs,
             formatDate,
+            currentPage: page,
+            nextPage: page + 1,
+            previousPage: page - 1,
+            hasNextPage: postPerPage * page < numberOfPosts,
+            hasPreviousPage: page > 1,
+            lastPage: Math.ceil(numberOfPosts / postPerPage),
         })
     } catch (error) {
         get500(req, res)
@@ -146,9 +160,8 @@ exports.uploadImage = (req, res) => {
             res.status(400).send(err);
         } else {
             if (req.file) {
-                const fileName = `${shortId.generate()}_${
-                    req.file.originalname
-                }`;
+                const fileName = `${shortId.generate()}_${req.file.originalname
+                    }`;
                 await sharp(req.file.buffer)
                     .jpeg({
                         quality: 60,
@@ -165,11 +178,11 @@ exports.uploadImage = (req, res) => {
         }
     });
 };
-exports.getDeletePost=async(req,res)=>{
+exports.getDeletePost = async (req, res) => {
     try {
         await Blog.findByIdAndRemove(req.params.id)
         res.redirect("/dashboard")
-        
+
     } catch (error) {
         res.render('errors/500')
     }

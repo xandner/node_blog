@@ -2,6 +2,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const uuid = require('uuid').v4;
 const shortId = require('shortid');
+const appRoot = require('app-root-path');
 
 const Blog = require('../models/blog');
 const { formatDate } = require('../utils/jalali');
@@ -113,11 +114,16 @@ exports.editPost = async (req, res) => {
 };
 
 exports.createPost = async (req, res) => {
+    const thumbnail = req.files ? req.files.thumbnail : {}
+    const fileName=`${shortId.generate()}_${thumbnail.name}`
+    const uploadPath=`${appRoot}/public/uploads/thumbnails/${fileName}`
 
     try {
+        req.body={...req.body,thumbnail}
         await Blog.postValidation(req.body)
+        await sharp(thumbnail.data).jpeg({quality:50}).toFile(uploadPath).catch(err=>console.log(err))
         // throw new Error('error')
-        await Blog.create({ ...req.body, user: req.user.id })
+        await Blog.create({ ...req.body, user: req.user.id ,thumbnail:fileName})
         res.redirect('/dashboard')
     } catch (err) {
         const errorArr = []

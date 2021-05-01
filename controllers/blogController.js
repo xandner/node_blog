@@ -22,7 +22,7 @@ exports.getIndex = async (req, res) => {
 
 exports.getSinglePost = async (req, res) => {
     try {
-        const post = await Blog.findOne({ _id: req.params.id }).populate(
+        const post = await Blog.findOne({ status: "public" }).populate(
             "user"
         );
 
